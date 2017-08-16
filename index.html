@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Mossville Slideshow</title>
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/blood.css" id="theme">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<!-- Printing and PDF exports -->
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<style>
+      .reveal section img {
+          margin: 15px 0px;
+          background: rgba(255, 255, 255, 0);
+          border: none;
+      }
+
+      .reveal .progress {
+      	height: 11px;
+      }
+
+      .video-control-panel{
+      	padding-top: 55% !important;
+      }
+
+      @media only screen
+        and (min-device-width: 800px){
+      		.reveal .controls {
+      		  border: 6px ridge grey;
+            background-color: rgba(0, 0, 0, 0.68);
+      	  }
+      }
+	  </style>
+
+	</head>
+
+	<body>
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="i/flaring_1.jpg">
+					<h2>Welcome to Mossville</h2>
+					<h5>A community Erased by Industry</h5>
+					<hr>
+					<p>
+						Navigate using the <b>arrow keys</b> to the bottom right of the screen, your <b>keyboard's directional keys</b>, or simply swipe on mobile devices.<br><br>
+					</p>
+				</section>
+				<section data-background-video="https://s3.amazonaws.com/fireriver/bw_map_3.webm" data-background-video-loop="true" controls>
+  			</section>
+				<section data-background-video="https://s3-us-west-2.amazonaws.com/darinacostamediafiles/video/StaceySlide1_v2.mp4" controls>
+				</section>
+        <section>
+        	<section data-background="i/aerial_1.jpg">
+					  <h2>Chapter One</h2>
+					  <h5>Industry</h5>
+						<div id="test-div">TEST DIV</div>
+					  <a href="#" class="navigate-down">
+					    <img src="i/down_arrow.png">
+					  </a>
+				  </section>
+  				<section data-background="i/resident_1.jpg">
+  				  <h3>Resident Name</h3>
+  				 	<p>Description</p>
+  				</section>
+        </section>
+				<section>
+        	<section data-background="i/sasol_1.jpg">
+					  <h2>Chapter Two</h2>
+					  <a href="#" class="navigate-down">
+					    <img data-src="i/down_arrow.png">
+					  </a>
+				  </section>
+					<section data-background="i/sasol_1.jpg">
+						<h2>Chapter Two<br> Slide 1</h2>
+					</section>
+					<section data-background="i/sasol_1.jpg">
+						<h2>Chapter Two<br> Slide 2</h2>
+						<p>Return to top.</p>
+						<br>
+						<a href="#/2">
+							<img data-src="i/down_arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+				<section>
+        	<section data-background="i/sasol_2.jpg">
+					  <h2>Chapter Three</h2>
+					  <a href="#" class="navigate-down">
+					    <img data-src="i/down_arrow.png">
+					  </a>
+				  </section>
+					<section data-background="i/sasol_2.jpg">
+						<h2>Chapter Three<br> Slide 1</h2>
+					</section>
+					<section data-background="i/sasol_2.jpg">
+						<h2>Chapter Three<br> Slide 2</h2>
+						<p>Return to top.</p>
+						<br>
+						<a href="#/2">
+							<img data-src="i/down_arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+				<section>
+        	<section data-background="i/resident_2.jpg">
+					  <h2>Chapter Four</h2>
+					  <a href="#" class="navigate-down">
+					    <img data-src="i/down_arrow.png">
+					  </a>
+				  </section>
+					<section>
+						<h2>Chapter 4 Slide 1</h2>
+					</section>
+					<section>
+						<h2>Chapter 4 Slide 2</h2>
+						<p>Return to top.</p>
+						<br>
+						<a href="#/2">
+							<img data-src="i/down_arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+		// Full list of configuration options available at:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+  controls: true,
+  progress: true,
+  history: true,
+  center: true,
+
+  transition: "slide", // none/fade/slide/convex/concave/zoom
+
+  // Optional reveal.js plugins
+  dependencies: [
+    {
+      src: "lib/js/classList.js",
+      condition: function() {
+        return !document.body.classList;
+      }
+    },
+    {
+      src: "plugin/markdown/marked.js",
+      condition: function() {
+        return !!document.querySelector("[data-markdown]");
+      }
+    },
+    {
+      src: "plugin/markdown/markdown.js",
+      condition: function() {
+        return !!document.querySelector("[data-markdown]");
+      }
+    },
+    {
+      src: "plugin/highlight/highlight.js",
+      async: true,
+      callback: function() {
+        hljs.initHighlightingOnLoad();
+      }
+    },
+    { src: "plugin/zoom-js/zoom.js", async: true },
+    { src: "plugin/notes/notes.js", async: true }
+  ]
+});
+</script>
+		<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script>
+		var link = document.createElement("link");
+link.rel = "stylesheet";
+link.type = "text/css";
+link.href = window.location.search.match(/print-pdf/gi)
+  ? "css/print/pdf.css"
+  : "css/print/paper.css";
+document.getElementsByTagName("head")[0].appendChild(link);
+</script>
+
+		<!-- Mossville custom JS -->
+		<script src="js/videoControl.js"></script>
+		<script>
+  $(document).ready(function() {
+  // enable custom behavior
+});
+</script>
+
+	</body>
+</html>

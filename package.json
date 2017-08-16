@@ -1,0 +1,29 @@
+{
+  "name": "slideshowtemplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/app.js",
+  "scripts": {
+    "server": "./scripts/build-run.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.6.5",
+    "bootstrap": "^3.3.7",
+    "connect": "^3.6.2",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "headjs": "^1.0.3",
+    "jquery": "^3.2.1",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "parallax-js": "git+https://github.com/wagerfield/parallax.git",
+    "reveal": "0.0.4",
+    "serve-static": "^1.12.3",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.10"
+  }
+}
