@@ -19,6 +19,7 @@
     "less-loader": "^4.0.5",
     "parallax-js": "git+https://github.com/wagerfield/parallax.git",
     "reveal": "0.0.4",
+    "reveal.js": "git+https://git@github.com/hakimel/reveal.js.git",
     "serve-static": "^1.12.3",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
