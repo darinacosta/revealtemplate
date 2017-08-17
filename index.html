@@ -5,15 +5,10 @@
 		<meta charset="utf-8">
 		<title>Mossville Slideshow</title>
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/blood.css" id="theme">
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-		<link rel="stylesheet" href="css/slider.css">
+		<link rel="stylesheet" href="build/bundle.css"/>
 		<!-- Printing and PDF exports -->
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -51,27 +46,28 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section data-background="i/flaring_1.jpg">
-					<h2>Welcome to Mossville</h2>
-					<h5>A community Erased by Industry</h5>
+					<h2>BAYOU BRIDGE</h2>
+					<h5>Stope the Black Snake</h5>
 					<hr>
 					<p>
 						Navigate using the <b>arrow keys</b> to the bottom right of the screen, your <b>keyboard's directional keys</b>, or simply swipe on mobile devices.<br><br>
 					</p>
 				</section>
 				<section>
-					<video width="100%" height="100%" autoplay>
-            <source src="https://s3.amazonaws.com/fireriver/bw_map_3.webm" type="video/webm">
-            <!--source src="movie.ogg" type="video/ogg"-->
-            Your browser does not support the video tag.
-          </video>
-					TEST
-  			</section>
-				<section data-background-video="https://s3-us-west-2.amazonaws.com/darinacostamediafiles/video/StaceySlide1_v2.mp4" controls>
-				</section>
-				<section data-background="i/resident_1.jpg">
-					<div class="stretch">
-					    <iframe width="100%" height="100%" src="//player.vimeo.com/video/122496816" frameborder="0" allowfullscreen></iframe>
+					<div id="pipeline-display-wrapper" style="height:100%; width:100%; background-color:white">
+  					<video width="100%" height="100%" id="pipeline" autoplay loop>
+              Your browser does not support the video tag.
+            </video>
 					</div>
+					<br>
+					<div class="h5"><small id="toggle-pipeline-caption"></small></div>
+					<button type="button" class="toggle-pipeline btn btn-warning" id="etppath">ETP PATH</button>
+					<button type="button" class="toggle-pipeline btn btn-primary" id="etpspills">ETP SPILLS 2015-2016</button>
+  			</section>
+				<!--section data-background-video="https://s3-us-west-2.amazonaws.com/darinacostamediafiles/video/StaceySlide1_v2.mp4" controls>
+				</section-->
+				<section data-state="video-embed">
+					  <div id="vimeo_1" class="stretch"></div>
 			  </section>
         <section>
         	<section data-background="i/aerial_1.jpg">
@@ -146,7 +142,7 @@
 				</section>
 			</div>
 		</div>
-		<!--script src="lib/js/head.min.js"></script-->
+		<script src="https://player.vimeo.com/api/player.js"></script>
 		<script src="lib/js/head.min.js"></script>
 		<script src="lib/js/reveal.js"></script>
 		<script src="build/vendor.bundle.js"></script>

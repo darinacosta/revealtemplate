@@ -1,6 +1,8 @@
-var videoCtrl = require("./videoCtrl.js");
-
-function init() {
+var svc = {};
+svc.appConfig = {
+  autoplayVimeo: true
+};
+svc.setRevealConfig = function() {
   Reveal.initialize({
     controls: true,
     progress: true,
@@ -39,12 +41,6 @@ function init() {
       { src: "plugin/notes/notes.js", async: true }
     ]
   });
-  console.log("hi");
-}
+};
 
-$(document).ready(function() {
-  init();
-  videoCtrl.videoControlInit();
-});
-
-module.export = {};
+module.exports = svc;

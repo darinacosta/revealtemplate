@@ -3,7 +3,7 @@ var path = require("path");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  context: __dirname + "/app",
+  context: __dirname,
   module: {
     loaders: [
       //{ loader: "css-loader", options: { url: false } },
@@ -20,6 +20,14 @@ module.exports = {
           fallback: "style-loader",
           use: "css-loader!less-loader?url=false"
         })
+      },
+      {
+        test: /\.modernizrrc.js$/,
+        use: ["modernizr-loader"]
+      },
+      {
+        test: /\.modernizrrc(\.json)?$/,
+        use: ["modernizr-loader", "json-loader"]
       }
     ]
   },
@@ -27,13 +35,14 @@ module.exports = {
     extensions: [".js", ".jsx"],
     modules: [__dirname + "/node_modules", "lib"],
     alias: {
-      fittext: "lib/jquery.fittext.js"
+      fittext: "lib/jquery.fittext.js",
+      modernizr$: path.resolve(__dirname, ".modernizrrc")
     }
   },
   entry: {
-    app: "./app.js",
-    //style: "./style.js",
-    vendor: ["jquery", "bootstrap", "reveal", "parallax-js"]
+    app: "./app/app.js",
+    style: "./css/style.js",
+    vendor: ["jquery", "bootstrap", "parallax-js"]
   },
   output: {
     path: __dirname + "/build",
