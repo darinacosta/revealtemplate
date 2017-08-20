@@ -1762,4 +1762,22 @@ body {
 
 .reveal small code {
   vertical-align: baseline; }
+html {
+  height: 100%;
+}
 
+body {
+  height: 100%;
+}
+
+#pipeline-display-wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('./../i/usa_line.png');
+}
+
+.video-embed {
+}

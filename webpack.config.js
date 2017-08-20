@@ -42,7 +42,7 @@ module.exports = {
   entry: {
     app: "./app/app.js",
     style: "./css/style.js",
-    vendor: ["jquery", "bootstrap", "parallax-js"]
+    vendor: ["jquery", "jquery-ui", "bootstrap", "parallax-js"]
   },
   output: {
     path: __dirname + "/build",

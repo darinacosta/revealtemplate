@@ -29,7 +29,10 @@ var videoSlideIndex = [
 ];
 
 svc.vimeoPlaceholders = {
-  vimeo_1: "//player.vimeo.com/video/122496816"
+  vimeo_1: {
+    backgroundImage: "flaring_1.jpg",
+    video: "//player.vimeo.com/video/122496816"
+  }
 };
 
 function _enableVideo(videoNumber) {
@@ -68,7 +71,7 @@ function _enableVideo(videoNumber) {
 svc.getVimeoIframeHtml = function(id) {
   return (
     '<iframe width="100%" height="100%" src="' +
-    svc.vimeoPlaceholders[id] +
+    svc.vimeoPlaceholders[id].video +
     '" frameborder="0" allowfullscreen></iframe>'
   );
 };
@@ -78,7 +81,6 @@ svc.playVimeoIframe = function(vimeoId) {
   var player = new Vimeo.Player(iframe);
   player.play();
   player.on("play", function() {
-    $("body").css("background-color", "black");
     console.log("played the video!");
   });
 };
@@ -108,5 +110,19 @@ svc.checkSlidesForVideo = function(e) {
     }
   }
 };
+
+svc.handleEmbedPlayButtonClick = function(id) {
+  $(".present .video-text-holder").css("display", "none");
+  $(".video-embed-" + id).css("background-color", "black");
+  $(".video-embed-" + id).css("background-image", "none");
+  setTimeout(function() {
+    svc.handleVimeoSlide();
+  }, 1000);
+};
+
+$(".play").on("click", function(e) {
+  var id = event.target.id.split("play-")[1];
+  svc.handleEmbedPlayButtonClick(id);
+});
 
 module.exports = svc;

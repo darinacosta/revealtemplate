@@ -17,222 +17,13 @@ else { delete window.Modernizr; }
 /***/ }),
 /* 2 */,
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($, module) {
-
-var videoCtrl = __webpack_require__(5);
-var pipelineGallery = __webpack_require__(7);
-var configSvc = __webpack_require__(8);
-var Modernizr = __webpack_require__(1);
-
-function init() {
-  configSvc.setConfig();
-  pipelineGallery.switchVideo("etppath");
-  Reveal.addEventListener("slidechanged", function(e) {
-    videoCtrl.checkSlidesForVideo(e);
-    pipelineGallery.switchVideo("etppath");
-  });
-}
-
-$(document).ready(function() {
-  init();
-});
-
-module.export = {};
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(4)(module)))
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__(0);
-var Parallax = __webpack_require__(2);
-var Modernizr = __webpack_require__(1);
-
-/*
-  Description: On each slide change, _checkSlidesForVideo iterates through the videoSlideIndex array
-    to determine if the current slide contains a video. If so, the video number associated with the slide
-    number is passed to the _enableVideo function, which adds custom video controls to the slide and
-    moves the presentation to the next slide on video end.
-*/
-
-var videos;
-var videoSlideIndex = [
-  {
-    slide: 1,
-    video: 1,
-    type: "animation",
-    id: "pipelines"
-  }
-  // {
-  //   slide: 2,
-  //   video: 1,
-  //   type: "server",
-  //   id: ""
-  // }
-];
-var svc = {};
-
-function _enableVideo(videoNumber) {
-  var isLoop = $(Reveal.getCurrentSlide()).attr("data-background-video-loop");
-  if (isLoop) {
-    return;
-  }
-
-  Reveal.getCurrentSlide().innerHTML =
-    '<div class="video-control-panel"><div id="video-controls"><button type="button" id="play-pause">Pause</button><input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1"></div></div>';
-
-  videos.on("ended", function() {
-    Reveal.next();
-  });
-
-  var targetVideo = videos[videoNumber];
-  var playButton = document.getElementById("play-pause");
-  var volumeBar = document.getElementById("volume-bar");
-
-  volumeBar.addEventListener("change", function() {
-    targetVideo.volume = volumeBar.value;
-  });
-
-  // Event listener for play/pause button
-  playButton.addEventListener("click", function() {
-    if (targetVideo.paused == true) {
-      targetVideo.play();
-      playButton.innerHTML = "Pause";
-    } else {
-      targetVideo.pause();
-      playButton.innerHTML = "Play";
-    }
-  });
-}
-
-svc.playVimeoIframe = function() {
-  if ($("section.present:has(iframe)").length > 0) {
-    var iframe = document.querySelector("section.present iframe");
-    console.log("IFRAME --- >", iframe);
-    var player = new Vimeo.Player(iframe);
-    player.play();
-    player.on("play", function() {
-      console.log("played the video!");
-    });
-  }
-};
-
-svc.checkSlidesForVideo = function(e) {
-  setTimeout(function() {
-    svc.playVimeoIframe();
-  }, 3000);
-  videos = $("video");
-  var slideNumber = e.indexh;
-  for (var i = 0; i < videoSlideIndex.length; i++) {
-    var videoIndex = videoSlideIndex[i].video;
-    if (
-      videoSlideIndex[i]["slide"] === slideNumber &&
-      videoSlideIndex[i]["type"] === "server"
-    ) {
-      _enableVideo(videoIndex);
-    }
-  }
-};
-
-module.exports = svc;
-
-
-/***/ }),
-/* 6 */,
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {var Modernizr = __webpack_require__(1);
-
-var svc = {};
-
-svc.videoUrls = {
-  etpspills: {
-    url: "https://s3.amazonaws.com/fireriver/ETP_SPILLS_2015-16",
-    caption: "Energy Transfer Partners Oil Spills 2015 - 16"
-  },
-  etppath: {
-    url: "https://s3.amazonaws.com/fireriver/bw_map_3",
-    caption: "Pipelines"
-  },
-  spills: ""
-};
-
-svc.handleVideoReplace = function(videoUrl) {
-  var targetVideo = $("#pipeline");
-  var src = videoUrl;
-  if (Modernizr.video && Modernizr.video.webm) {
-    src = videoUrl + ".webm";
-  } else if (Modernizr.video && Modernizr.video.ogg) {
-    src = videoUrl + ".ogg";
-  }
-  console.log("video source --- >", targetVideo.attr("src"));
-  targetVideo.attr("src", src);
-  console.log(targetVideo);
-};
-
-svc.switchVideo = function(id) {
-  var url = svc.videoUrls[id].url;
-  var caption = svc.videoUrls[id].caption;
-  setActiveButton(id);
-  svc.handleVideoReplace(url);
-  $("#toggle-pipeline-caption").text(caption);
-};
-
-function setActiveButton(id) {
-  $(".toggle-pipeline").removeClass("btn-warning");
-  $(".toggle-pipeline").addClass("btn-primary");
-  $(".toggle-pipeline#" + id).removeClass("btn-primary");
-  $(".toggle-pipeline#" + id).addClass("btn-warning");
-}
-
-$(".toggle-pipeline").on("click", function(e) {
-  var id = e.target.id;
-  svc.switchVideo(id);
-});
-
-module.exports = svc;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports) {
 
 var svc = {};
-svc.setConfig = function() {
+svc.appConfig = {
+  autoplayVimeo: false
+};
+svc.setRevealConfig = function() {
   Reveal.initialize({
     controls: true,
     progress: true,
@@ -276,5 +67,257 @@ svc.setConfig = function() {
 module.exports = svc;
 
 
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($, module) {
+
+var videoCtrl = __webpack_require__(6);
+var pipelineGallery = __webpack_require__(8);
+var configSvc = __webpack_require__(3);
+var Modernizr = __webpack_require__(1);
+
+function init() {
+  configSvc.setRevealConfig();
+  //videoCtrl.handleVimeoSlide();
+  pipelineGallery.switchVideo("etppath");
+
+  Reveal.addEventListener("slidechanged", function(e) {
+    videoCtrl.checkSlidesForVideo(e);
+    //videoCtrl.handleVimeoSlide();
+    pipelineGallery.switchVideo("etppath");
+  });
+
+  Reveal.addEventListener(
+    "video-embed",
+    function() {
+      // Reveal.configure({ width: 3000, height: 2000 });
+    },
+    false
+  );
+}
+
+$(document).ready(function() {
+  init();
+});
+
+module.export = {};
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(5)(module)))
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__(0);
+var Parallax = __webpack_require__(2);
+var Modernizr = __webpack_require__(1);
+var configSvc = __webpack_require__(3);
+
+/*
+  Description: On each slide change, _checkSlidesForVideo iterates through the videoSlideIndex array
+    to determine if the current slide contains a video. If so, the video number associated with the slide
+    number is passed to the _enableVideo function, which adds custom video controls to the slide and
+    moves the presentation to the next slide on video end.
+*/
+
+var videos;
+var svc = {};
+
+var videoSlideIndex = [
+  {
+    slide: 1,
+    video: 1,
+    type: "animation",
+    id: "pipelines"
+  }
+  // {
+  //   slide: 2,
+  //   video: 1,
+  //   type: "server",
+  //   id: ""
+  // }
+];
+
+svc.vimeoPlaceholders = {
+  vimeo_1: {
+    backgroundImage: "flaring_1.jpg",
+    video: "//player.vimeo.com/video/122496816"
+  }
+};
+
+function _enableVideo(videoNumber) {
+  var isLoop = $(Reveal.getCurrentSlide()).attr("data-background-video-loop");
+  if (isLoop) {
+    return;
+  }
+
+  Reveal.getCurrentSlide().innerHTML =
+    '<div class="video-control-panel"><div id="video-controls"><button type="button" id="play-pause">Pause</button><input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1"></div></div>';
+
+  videos.on("ended", function() {
+    Reveal.next();
+  });
+
+  var targetVideo = videos[videoNumber];
+  var playButton = document.getElementById("play-pause");
+  var volumeBar = document.getElementById("volume-bar");
+
+  volumeBar.addEventListener("change", function() {
+    targetVideo.volume = volumeBar.value;
+  });
+
+  // Event listener for play/pause button
+  playButton.addEventListener("click", function() {
+    if (targetVideo.paused == true) {
+      targetVideo.play();
+      playButton.innerHTML = "Pause";
+    } else {
+      targetVideo.pause();
+      playButton.innerHTML = "Play";
+    }
+  });
+}
+
+svc.getVimeoIframeHtml = function(id) {
+  return (
+    '<iframe width="100%" height="100%" src="' +
+    svc.vimeoPlaceholders[id].video +
+    '" frameborder="0" allowfullscreen></iframe>'
+  );
+};
+
+svc.playVimeoIframe = function(vimeoId) {
+  var iframe = document.querySelector("#" + vimeoId + " iframe");
+  var player = new Vimeo.Player(iframe);
+  player.play();
+  player.on("play", function() {
+    console.log("played the video!");
+  });
+};
+
+svc.handleVimeoSlide = function() {
+  var vimeoId = $("section.present").find("[id^=vimeo_]").attr("id");
+  if (!vimeoId) {
+    return;
+  }
+  var hasIframe = $("section.present:has('iframe')").length > 0;
+  if (vimeoId && !hasIframe) {
+    $("#" + vimeoId).html(svc.getVimeoIframeHtml(vimeoId));
+  }
+  svc.playVimeoIframe(vimeoId);
+};
+
+svc.checkSlidesForVideo = function(e) {
+  videos = $("video");
+  var slideNumber = e.indexh;
+  for (var i = 0; i < videoSlideIndex.length; i++) {
+    var videoIndex = videoSlideIndex[i].video;
+    if (
+      videoSlideIndex[i]["slide"] === slideNumber &&
+      videoSlideIndex[i]["type"] === "server"
+    ) {
+      _enableVideo(videoIndex);
+    }
+  }
+};
+
+$(".play").on("click", function(e) {
+  var id = e.target.id.split("play-")[1];
+
+  $(".video-embed-" + id).css("background-color", "black");
+  $(".video-embed-" + id).css("background-image", "none");
+  svc.handleVimeoSlide();
+});
+
+module.exports = svc;
+
+
+/***/ }),
+/* 7 */,
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {var Modernizr = __webpack_require__(1);
+
+var svc = {};
+svc.videoHost = "https://s3.amazonaws.com/fireriver/";
+svc.videoUrls = {
+  etpspills: {
+    url: "spills_2015-2016",
+    caption: "Energy Transfer Partners Oil Spills 2015 - 16"
+  },
+  etppath: {
+    url: "etp_pipeline_us",
+    caption: "Pipelines"
+  },
+  spills: ""
+};
+
+svc.handleVideoReplace = function(videoUrl) {
+  var targetVideo = $("#pipeline");
+  var src = videoUrl;
+  if (Modernizr.video && Modernizr.video.webm) {
+    src = videoUrl + ".webm";
+  } else if (Modernizr.video && Modernizr.video.ogg) {
+    src = videoUrl + ".ogg";
+  }
+  targetVideo.attr("src", src);
+};
+
+svc.switchVideo = function(id) {
+  var url = svc.videoHost + svc.videoUrls[id].url;
+  var caption = svc.videoUrls[id].caption;
+  setActiveButton(id);
+  svc.handleVideoReplace(url);
+  $("#toggle-pipeline-caption").text(caption);
+};
+
+function setActiveButton(id) {
+  $(".toggle-pipeline").removeClass("btn-warning");
+  $(".toggle-pipeline").addClass("btn-primary");
+  $(".toggle-pipeline#" + id).removeClass("btn-primary");
+  $(".toggle-pipeline#" + id).addClass("btn-warning");
+}
+
+$(".toggle-pipeline").on("click", function(e) {
+  var id = e.target.id;
+  svc.switchVideo(id);
+});
+
+module.exports = svc;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
 /***/ })
-],[3]);
+],[4]);

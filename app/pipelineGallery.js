@@ -1,14 +1,14 @@
 var Modernizr = require("modernizr");
 
 var svc = {};
-
+svc.videoHost = "https://s3.amazonaws.com/fireriver/";
 svc.videoUrls = {
   etpspills: {
-    url: "https://s3.amazonaws.com/fireriver/ETP_SPILLS_2015-16",
+    url: "spills_2015-2016",
     caption: "Energy Transfer Partners Oil Spills 2015 - 16"
   },
   etppath: {
-    url: "https://s3.amazonaws.com/fireriver/bw_map_3",
+    url: "etp_pipeline_us",
     caption: "Pipelines"
   },
   spills: ""
@@ -26,7 +26,7 @@ svc.handleVideoReplace = function(videoUrl) {
 };
 
 svc.switchVideo = function(id) {
-  var url = svc.videoUrls[id].url;
+  var url = svc.videoHost + svc.videoUrls[id].url;
   var caption = svc.videoUrls[id].caption;
   setActiveButton(id);
   svc.handleVideoReplace(url);

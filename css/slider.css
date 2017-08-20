@@ -14,3 +14,18 @@ body {
   background-repeat: no-repeat;
   background-image: url('./../i/usa_line.png');
 }
+
+.video-embed {
+}
+
+.video-text-holder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  -webkit-transform: translate(-50%, -40%);
+  -ms-transform: translate(-50%, -40%);
+  transform: translate(-50%, -40%);
+  text-align: center;
+  z-index: 4;
+}
