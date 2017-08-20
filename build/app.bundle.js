@@ -1,6 +1,5 @@
 webpackJsonp([1],[
-/* 0 */,
-/* 1 */
+/* 0 */
 /***/ (function(module, exports) {
 
 ;(function(window){
@@ -15,8 +14,8 @@ else { delete window.Modernizr; }
 })(window);
 
 /***/ }),
-/* 2 */,
-/* 3 */
+/* 1 */,
+/* 2 */
 /***/ (function(module, exports) {
 
 var svc = {};
@@ -68,25 +67,23 @@ module.exports = svc;
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($, module) {
+/* WEBPACK VAR INJECTION */(function(module) {
 
-var videoCtrl = __webpack_require__(6);
-var pipelineGallery = __webpack_require__(8);
-var configSvc = __webpack_require__(3);
-var Modernizr = __webpack_require__(1);
+var videoCtrl = __webpack_require__(5);
+var pipelineGallery = __webpack_require__(7);
+var configSvc = __webpack_require__(2);
+var Modernizr = __webpack_require__(0);
 
 function init() {
   configSvc.setRevealConfig();
-  //videoCtrl.handleVimeoSlide();
   pipelineGallery.switchVideo("etppath");
 
   Reveal.addEventListener("slidechanged", function(e) {
     videoCtrl.checkSlidesForVideo(e);
-    //videoCtrl.handleVimeoSlide();
     pipelineGallery.switchVideo("etppath");
   });
 
@@ -105,10 +102,10 @@ $(document).ready(function() {
 
 module.export = {};
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(5)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -136,13 +133,13 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $ = __webpack_require__(0);
-var Parallax = __webpack_require__(2);
-var Modernizr = __webpack_require__(1);
-var configSvc = __webpack_require__(3);
+//var $ = require("jquery");
+var Parallax = __webpack_require__(1);
+var Modernizr = __webpack_require__(0);
+var configSvc = __webpack_require__(2);
 
 /*
   Description: On each slide change, _checkSlidesForVideo iterates through the videoSlideIndex array
@@ -252,23 +249,33 @@ svc.checkSlidesForVideo = function(e) {
   }
 };
 
-$(".play").on("click", function(e) {
-  var id = e.target.id.split("play-")[1];
-
+svc.handleEmbedPlayButtonClick = function(id) {
+  $(".present .video-text-holder").css("display", "none");
   $(".video-embed-" + id).css("background-color", "black");
-  $(".video-embed-" + id).css("background-image", "none");
-  svc.handleVimeoSlide();
+  $(".video-embed-" + id).fadeOut(300, function() {
+    $("#bg").css("background-image", "none");
+    $("#bg").fadeIn(300);
+  });
+  //$(".video-embed-" + id).css("background-image", "none");
+  setTimeout(function() {
+    svc.handleVimeoSlide();
+  }, 1000);
+};
+
+$(".play").on("click", function(e) {
+  var id = event.target.id.split("play-")[1];
+  svc.handleEmbedPlayButtonClick(id);
 });
 
 module.exports = svc;
 
 
 /***/ }),
-/* 7 */,
-/* 8 */
+/* 6 */,
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var Modernizr = __webpack_require__(1);
+var Modernizr = __webpack_require__(0);
 
 var svc = {};
 svc.videoHost = "https://s3.amazonaws.com/fireriver/";
@@ -317,7 +324,6 @@ $(".toggle-pipeline").on("click", function(e) {
 
 module.exports = svc;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })
-],[4]);
+],[3]);

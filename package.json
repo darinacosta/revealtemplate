@@ -30,6 +30,8 @@
     "webpack-dev-server": "^2.6.1"
   },
   "dependencies": {
-    "handlebars": "^4.0.10"
+    "handlebars": "^4.0.10",
+    "jquery-ui-bundle": "^1.12.1",
+    "webpack-jquery-ui": "^1.0.0"
   }
 }

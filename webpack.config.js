@@ -42,7 +42,7 @@ module.exports = {
   entry: {
     app: "./app/app.js",
     style: "./css/style.js",
-    vendor: ["jquery", "jquery-ui", "bootstrap", "parallax-js"]
+    vendor: ["bootstrap", "parallax-js"]
   },
   output: {
     path: __dirname + "/build",
@@ -58,14 +58,16 @@ module.exports = {
       name: "vendor",
       filename: "vendor.bundle.js"
     }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery",
-      tether: "tether",
-      Tether: "tether",
-      "window.Tether": "tether"
-    }),
+    new webpack.ProvidePlugin(
+      {
+        // $: "jquery",
+        // jQuery: "jquery",
+        // "window.jQuery": "jquery",
+        // tether: "tether",
+        // Tether: "tether",
+        // "window.Tether": "tether"
+      }
+    ),
     new ExtractTextPlugin("./bundle.css")
   ]
 };
