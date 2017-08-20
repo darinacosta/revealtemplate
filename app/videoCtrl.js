@@ -78,6 +78,7 @@ svc.playVimeoIframe = function(vimeoId) {
   var player = new Vimeo.Player(iframe);
   player.play();
   player.on("play", function() {
+    $("body").css("background-color", "black");
     console.log("played the video!");
   });
 };

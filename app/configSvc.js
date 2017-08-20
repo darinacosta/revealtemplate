@@ -1,6 +1,6 @@
 var svc = {};
 svc.appConfig = {
-  autoplayVimeo: true
+  autoplayVimeo: false
 };
 svc.setRevealConfig = function() {
   Reveal.initialize({
