@@ -250,13 +250,13 @@ svc.checkSlidesForVideo = function(e) {
 };
 
 svc.handleEmbedPlayButtonClick = function(id) {
+  var target = ".video-embed-" + id;
+  $(target).css("background-color", "black");
   $(".present .video-text-holder").css("display", "none");
-  $(".video-embed-" + id).css("background-color", "black");
-  $(".video-embed-" + id).fadeOut(300, function() {
-    $("#bg").css("background-image", "none");
-    $("#bg").fadeIn(300);
+  $(target).fadeOut(1000, function() {
+    $(target).css("background-image", "none");
+    $(target).fadeIn(1000);
   });
-  //$(".video-embed-" + id).css("background-image", "none");
   setTimeout(function() {
     svc.handleVimeoSlide();
   }, 1000);
