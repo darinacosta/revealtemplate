@@ -1774,9 +1774,7 @@ body {
   height: 100%;
   width: 100%;
   background-color: white;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url('./../i/usa_line.png');
+  background: url('./../i/usa_line.png') no-repeat center center;
 }
 
 .video-embed {
@@ -1792,4 +1790,10 @@ body {
   transform: translate(-50%, -40%);
   text-align: center;
   z-index: 4;
+}
+
+#pipeline-display-wrapper video {
+  margin-top: 28px;
+  max-width: 92%;
+  max-height: 92%;
 }
