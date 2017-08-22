@@ -1,0 +1,48 @@
+@keyframes border-pulsate {
+  0% {
+    border-color: rgba(0, 255, 255, 1);
+  }
+  50% {
+    border-color: rgba(0, 255, 255, 0);
+  }
+  100% {
+    border-color: rgba(0, 255, 255, 1);
+  }
+}
+
+#pipeline-display-wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  background: url('./../i/usa_line.png') no-repeat center center;
+}
+
+#pipeline-display-wrapper video {
+  margin-top: 28px;
+  max-width: 92%;
+  max-height: 92%;
+}
+
+.video-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 9997;
+}
+
+.video-gallery-caption {
+  animation: border-pulsate 2s infinite;
+}
+
+.toggle-pipeline.btn {
+  z-index: 9999;
+}
+
+.btn-collection {
+  z-index: 9999;
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+}

@@ -1,0 +1,24 @@
+.hotspot-container {
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+  z-index: 9998;
+}
+
+.hotspot {
+  z-index: 9999;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, .5);
+  position: absolute;
+  cursor: pointer;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: pulse 1s ease-in-out alternate infinite;
+  animation: pulse 1s ease-in-out alternate infinite;
+}

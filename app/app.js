@@ -3,6 +3,7 @@
 var videoCtrl = require("./videoCtrl.js");
 var pipelineGallery = require("./pipelineGallery.js");
 var configSvc = require("./configSvc.js");
+var hotspotSvc = require("./hotspotSvc.js");
 var Modernizr = require("modernizr");
 
 function init() {
@@ -36,6 +37,13 @@ function init() {
 
 $(document).ready(function() {
   init();
+  hotspotSvc.createHotspot({
+    id: 1,
+    top: 20,
+    right: 20,
+    content: "yoohoo!",
+    contentTarget: "#toggle-pipeline-caption"
+  });
 });
 
 module.export = {};
