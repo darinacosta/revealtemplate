@@ -85,11 +85,20 @@ svc.playVimeoIframe = function(vimeoId) {
   });
 };
 
+svc.currentSlideHasVimeoVideo = function() {
+  var vimeoId = $("section.present").find("[id^=vimeo_]").attr("id");
+  if (!vimeoId) {
+    return false;
+  }
+  return true;
+};
+
 svc.handleVimeoSlide = function() {
   var vimeoId = $("section.present").find("[id^=vimeo_]").attr("id");
   if (!vimeoId) {
-    return;
+    return false;
   }
+  $(".backgrounds").css("background-color", "black");
   var hasIframe = $("section.present:has('iframe')").length > 0;
   if (vimeoId && !hasIframe) {
     $("#" + vimeoId).html(svc.getVimeoIframeHtml(vimeoId));
@@ -113,15 +122,17 @@ svc.checkSlidesForVideo = function(e) {
 
 svc.handleEmbedPlayButtonClick = function(id) {
   var target = ".video-embed-" + id;
-  $(target).css("background-color", "black");
+  $(".backgrounds").css(
+    "background-color",
+    configSvc.appConfig.style.backgroundColor.vimeo
+  );
   $(".present .video-text-holder").css("display", "none");
   $(target).fadeOut(1000, function() {
     $(target).css("background-image", "none");
-    $(target).fadeIn(1000);
+    $(target).fadeIn(1000, function() {
+      svc.handleVimeoSlide();
+    });
   });
-  setTimeout(function() {
-    svc.handleVimeoSlide();
-  }, 1000);
 };
 
 $(".play").on("click", function(e) {

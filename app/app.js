@@ -10,6 +10,17 @@ function init() {
   pipelineGallery.switchVideo("etppath");
 
   Reveal.addEventListener("slidechanged", function(e) {
+    if (videoCtrl.currentSlideHasVimeoVideo()) {
+      $(".backgrounds").css(
+        "background-color",
+        configSvc.appConfig.style.backgroundColor.vimeo
+      );
+    } else {
+      $(".backgrounds").css(
+        "background-color",
+        configSvc.appConfig.style.backgroundColor.default
+      );
+    }
     videoCtrl.checkSlidesForVideo(e);
     pipelineGallery.switchVideo("etppath");
   });

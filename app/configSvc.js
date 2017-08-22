@@ -1,6 +1,12 @@
 var svc = {};
 svc.appConfig = {
-  autoplayVimeo: false
+  autoplayVimeo: false,
+  style: {
+    backgroundColor: {
+      default: "white",
+      vimeo: "black"
+    }
+  }
 };
 svc.setRevealConfig = function() {
   Reveal.initialize({
