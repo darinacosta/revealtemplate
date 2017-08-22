@@ -21,6 +21,8 @@ svc.handleVideoReplace = function(videoUrl) {
     src = videoUrl + ".webm";
   } else if (Modernizr.video && Modernizr.video.ogg) {
     src = videoUrl + ".ogg";
+  } else {
+    src = videoUrl + ".mp4";
   }
   targetVideo.attr("src", src);
 };

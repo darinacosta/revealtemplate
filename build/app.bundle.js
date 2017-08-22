@@ -294,7 +294,9 @@ svc.videoUrls = {
 svc.handleVideoReplace = function(videoUrl) {
   var targetVideo = $("#pipeline");
   var src = videoUrl;
-  if (Modernizr.video && Modernizr.video.webm) {
+  if (Modernizr.video && Modernizr.video.mp4) {
+    src = videoUrl + ".mp4";
+  } else if (Modernizr.video && Modernizr.video.webm) {
     src = videoUrl + ".webm";
   } else if (Modernizr.video && Modernizr.video.ogg) {
     src = videoUrl + ".ogg";
